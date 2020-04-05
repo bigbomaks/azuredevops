@@ -1,2 +1,2 @@
 # azuredevops
-Repo to contain usefull resources related to Azure 
+Everyday usefull resources and Command related related to Azure 
