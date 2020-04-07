@@ -51,10 +51,25 @@ Stop-AzVM -ResourceGroupName "CORERESOURCEGROUP" -Name "TestVMconsole" -force   
 Start-AzVM -ResourceGroupName "CORERESOURCEGROUP" -Name "TestVMconsole"
 
 
+##########################################################DNS##########################################################################
+#DNS Zone Creation
+New-Azdnszone -Name "<Name>.<domain>" -ResourceGroupName "<ResourceGroupName>"
 
+#To create a new DNS record set mapping
+New-AzDnsRecordSet -Name www -RecordType A -ZoneName <ZoneName> -ResourceGroupName <ResourceGroupName> -Ttl 3600 -DnsRecords (New-AzDNSRecordConfig -Ipv4Address <IP address to map>)
 
+#To get DNS recordset present in DNS zone
+Get-AzDnsRecordSet -ZoneName <Zone Name > -ResourceGroupName <ResourceGroupName>
 
+#To set a DNS for webapp 
 
+Set-AzWebApp -Name webappname -ResourceGroupName dnshandson -HostNames @("www.testdnshandson.com")
+
+#To Delete all resource group in subscription 
+
+Get-AzResourceGroup | Remove-AzResourceGroup -force
+
+##########################################################ARM############################################################################
 #Register Azure resources before using ARM template 
 
 Register-AzResourceProvider -ProviderNamespace Microsoft.Network
